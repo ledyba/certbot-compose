@@ -6,6 +6,7 @@ services:
     container_name: certbot
     volumes:
       - ./:/etc/letsencrypt
+      - /opt/books/lunar/www/_http:/www
     ports:
       # IPv4にbindしないとCAAレコードを要求され、詰む。
       - "160.16.233.95:80:80"
