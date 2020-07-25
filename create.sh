@@ -15,6 +15,7 @@ function create() {
   fi
 }
 
+create -d 'ledyba.org' -d '*.ledyba.org'
 create -d '7io.org' -d '*.7io.org'
 create -d 'hexe.net' -d '*.hexe.net'
 create -d 'open-dokidokivisual.com' -d '*.open-dokidokivisual.com'
