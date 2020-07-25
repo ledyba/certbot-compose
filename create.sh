@@ -2,52 +2,26 @@
 
 echo [$(date)] Started.
 
-CERTBOT="docker-compose run --service-ports --rm certbot certonly -vvv --agree-tos --email psi@7io.org --non-interactive --keep --standalone"
+CERTBOT="docker-compose run --service-ports --rm certbot certonly -vvv --agree-tos --email psi@7io.org --manual --keep --preferred-challenges dns-01"
+LUNAR_ROOT=/opt/books/lunar
 
-echo -n "hexe.net: "
-RESULT="$(${CERTBOT} -d hexe.net -d ura.hexe.net -d sabbat.hexe.net 2>&1)"
-if [ $? -eq 0 ]; then
-  echo Success.
-else
-  echo Failure.
-  echo "$RESULT"
-fi
+docker-compose -f ${LUNAR_ROOT}/docker-compose.yml down
 
-exit
+function create() {
+  echo "Crete a certificate with: " $(echo "$@" | sed -e "s/-d//g")
+  ${CERTBOT} "$@"
+  if [ $? -eq 0 ]; then
+    echo Success.
+  else
+    echo Failure.
+    exit -1
+  fi
+}
 
-echo -n "7io.org: "
-RESULT="$(${CERTBOT} -d 7io.org -d app.7io.org -d arc.7io.org 2>&1)"
-if [ $? -eq 0 ]; then
-  echo Success.
-else
-  echo Failure.
-  echo "$RESULT"
-fi
+create -d '7io.org' -d '*.7io.org'
+create -d 'hexe.net' -d '*.hexe.net'
+create -d 'open-dokidokivisual.com' -d '*.open-dokidokivisual.com'
+create -d 'dokidokivisual.org' -d '*.dokidokivisual.org'
 
-echo -n "open-dokidokivisual.com: "
-RESULT="$(${CERTBOT} -d open-dokidokivisual.com 2>&1)"
-if [ $? -eq 0 ]; then
-  echo Success.
-else
-  echo Failure.
-  echo "$RESULT"
-fi
-
-echo -n "dokidokivisual.org: "
-RESULT="$(${CERTBOT} -d dokidokivisual.org 2>&1)"
-if [ $? -eq 0 ]; then
-  echo Success.
-else
-  echo Failure.
-  echo "$RESULT"
-fi
-
-echo -n "Reloading nginx: "
-RESULT="$(cd ${LUNAR_ROOT} && docker-compose exec web /usr/sbin/nginx -s reload 2>&1)"
-if [ $? -eq 0 ]; then
-  echo Success.
-else
-  echo Failure.
-  echo "$RESULT"
-fi
+docker-compose -f ${LUNAR_ROOT}/docker-compose.yml up -d
 
