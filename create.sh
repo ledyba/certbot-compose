@@ -4,9 +4,6 @@ echo [$(date)] Started.
 
 CERTBOT="docker-compose run --service-ports --rm certbot certonly -vvv --agree-tos --email psi@7io.org --manual --keep --preferred-challenges dns-01"
 LUNAR_ROOT=/opt/books/lunar
-
-docker-compose -f ${LUNAR_ROOT}/docker-compose.yml down
-
 function create() {
   echo "Crete a certificate with: " $(echo "$@" | sed -e "s/-d//g")
   ${CERTBOT} "$@"
@@ -22,6 +19,5 @@ create -d '7io.org' -d '*.7io.org'
 create -d 'hexe.net' -d '*.hexe.net'
 create -d 'open-dokidokivisual.com' -d '*.open-dokidokivisual.com'
 create -d 'dokidokivisual.org' -d '*.dokidokivisual.org'
-
-docker-compose -f ${LUNAR_ROOT}/docker-compose.yml up -d
+create -d 'hexe.ink' -d '*.hexe.ink'
 
