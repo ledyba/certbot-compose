@@ -5,7 +5,9 @@ services:
   certbot:
     build:
       context: ./image/certbot
+    #image: 'ghcr.io/ledyba/certbot-with-dns_valuedomain:latest'
     container_name: certbot
+    net: 'host'
     volumes:
       - ./data:/etc/letsencrypt
       - ./conf:/etc/certbot

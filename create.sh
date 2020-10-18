@@ -5,7 +5,6 @@ echo [$(date)] Started.
 function create() {
   echo "Crete a certificate with: " $(echo "$@" | sed -e "s/-d//g")
   docker-compose run \
-    --service-ports \
     --rm certbot \
       certonly \
         -vvv \

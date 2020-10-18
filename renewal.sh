@@ -5,7 +5,7 @@ echo [$(date)] Started.
 PORTA_ROOT="/opt/books/porta"
 
 echo -n "Renew: "
-docker-compose run --service-ports --rm certbot renew -vvv 2>&1
+docker-compose run --rm certbot renew -vvv 2>&1
 
 if [ $? -eq 0 ]; then
   echo Success.
