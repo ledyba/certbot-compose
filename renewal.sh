@@ -1,5 +1,12 @@
 #! /bin/bash
 
+ROOT_DIR="$(cd "$(readlink -f "$(dirname "$0")")" && pwd)"
+cd "${ROOT_DIR}" || exit 1
+set -e -u -o pipefail
+
+# https://github.com/docker/compose/issues/5696
+export COMPOSE_INTERACTIVE_NO_CLI=1
+
 echo [$(date)] Started.
 
 PORTA_ROOT="/opt/books/porta"

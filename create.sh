@@ -1,5 +1,9 @@
 #! /bin/bash
 
+ROOT_DIR="$(cd "$(readlink -f "$(dirname "$0")")" && pwd)"
+cd "${ROOT_DIR}" || exit 1
+set -e -u -o pipefail
+
 echo [$(date)] Started.
 
 function create() {
