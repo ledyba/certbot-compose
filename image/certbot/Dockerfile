@@ -3,11 +3,12 @@ USER root
 
 ENV TZ JST-9
 
+ADD "./src" "/src"
+
 RUN pip install --upgrade pip && \
     pip install --upgrade setuptools &&\
-    pip install git+https://github.com/ledyba/lexicon.git@feature/valuedomain && \
-    git clone -b feature/ValueDomain --single-branch https://github.com/ledyba/certbot.git /tmp/certbot && \
-    pip install /tmp/certbot/certbot && \
-    pip install /tmp/certbot/certbot-dns-valuedomain
+    pip install /src/certbot/acme && \
+    pip install /src/certbot/certbot && \
+    pip install /src/certbot/certbot-dns-valuedomain
 
 ENTRYPOINT [ "certbot" ]

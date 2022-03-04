@@ -1,10 +1,11 @@
 ---
-version: '3.7'
+version: '3.9'
 
 services:
   certbot:
     build:
-      context: ./image/certbot
+      context: ./
+      dockerfile: ./image/certbot/Dockerfile
     #image: 'ghcr.io/ledyba/certbot-with-dns_valuedomain:latest'
     container_name: certbot
     network_mode: 'host'
