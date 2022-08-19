@@ -1,5 +1,7 @@
 #! /bin/bash
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 ROOT_DIR="$(cd "$(readlink -f "$(dirname "$0")")" && pwd)"
 cd "${ROOT_DIR}" || exit 1
 set -e -u -o pipefail
@@ -32,9 +34,7 @@ function create() {
 create -d 'hexe.net' -d '*.hexe.net'
 create -d '7io.org' -d '*.7io.org' -d '*.app.7io.org'
 create -d 'ledyba.org' -d '*.ledyba.org'
-create -d 'open-dokidokivisual.com' -d '*.open-dokidokivisual.com'
-create -d 'dokidokivisual.org' -d '*.dokidokivisual.org'
-create -d 'hexe.ink' -d '*.hexe.ink'
 
 sudo find data -type f -exec chmod 644 {} \;
 sudo find data -type d -exec chmod 755 {} \;
+
