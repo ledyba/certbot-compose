@@ -32,7 +32,7 @@ function create() {
 }
 
 create -d 'hexe.net' -d '*.hexe.net'
-create -d '7io.org' -d '*.7io.org' -d '*.app.7io.org'
+create -d '7io.org' -d '*.7io.org'
 create -d 'ledyba.org' -d '*.ledyba.org'
 
 sudo find data -type f -exec chmod 644 {} \;

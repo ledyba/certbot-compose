@@ -6,7 +6,6 @@ services:
     build:
       context: ./
       dockerfile: ./image/certbot/Dockerfile
-    #image: 'ghcr.io/ledyba/certbot-with-dns_valuedomain:latest'
     container_name: certbot
     network_mode: 'host'
     volumes:
