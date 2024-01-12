@@ -4,12 +4,12 @@ version: '3.9'
 services:
   certbot:
     build:
-      context: ./
-      dockerfile: ./image/certbot/Dockerfile
-    container_name: certbot
+      context: './'
+      dockerfile: './image/certbot/Dockerfile'
+    container_name: 'certbot'
     network_mode: 'host'
     volumes:
-      - ./data:/etc/letsencrypt
-      - ./conf:/etc/certbot
+      - './data:/etc/letsencrypt'
+      - './conf:/etc/certbot'
 
 networks: {}
