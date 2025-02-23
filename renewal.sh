@@ -12,10 +12,10 @@ export COMPOSE_INTERACTIVE_NO_CLI=1
 
 echo [$(date)] Started.
 
-PORTA_ROOT="/opt/books/porta"
+WEB_ROOT="/opt/books/web"
 
 echo -n "Renew: "
-docker-compose run --rm certbot renew -vvv 2>&1
+docker compose run --rm certbot renew -vvv 2>&1
 
 if [ $? -eq 0 ]; then
   echo Success.
@@ -25,7 +25,7 @@ else
 fi
 
 echo -n "Reloading nginx: "
-env --chdir="${PORTA_ROOT}" docker-compose exec web /usr/sbin/nginx -s reload 2>&1
+env --chdir="${WEB_ROOT}" docker compose exec web /usr/sbin/nginx -s reload 2>&1
 if [ $? -eq 0 ]; then
   echo Success.
 else
