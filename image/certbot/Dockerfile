@@ -3,12 +3,12 @@ USER root
 
 ENV TZ JST-9
 
-ADD "./src" "/src"
-
-RUN pip install --upgrade pip && \
-    pip install --upgrade setuptools &&\
-    pip install /src/certbot/acme && \
-    pip install /src/certbot/certbot && \
-    pip install /src/certbot/certbot-dns-valuedomain
+# certbot-dns-valuedomain は zope.interface をトップレベルで import するが、
+# 依存として宣言していないため明示的に入れる。
+RUN pip install --upgrade pip setuptools && \
+    pip install \
+      certbot \
+      certbot-dns-valuedomain \
+      zope.interface
 
 ENTRYPOINT [ "certbot" ]
